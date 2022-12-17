@@ -1,0 +1,42 @@
+<html>
+<head>
+</head>
+<body>
+<h2>Search Recipe by Tags</h2>
+
+<form action='/searching' method="POST">
+	<fieldset>
+		<label>Choose a tag:</label>
+		<select name="chosen_tag">
+			{% for tag in tags %}
+			<option value={{tag}}>{{tag}}</option>
+			{% endfor %}
+		</select>
+
+	  <div>
+		<button type="submit">Search</button>
+	  </div>
+	</fieldset>
+</form>
+
+<a href="/home">Go back</a>
+
+</body>
+
+
+<script>
+const otherCheckbox = document.querySelector('#other');
+const otherText = document.querySelector('#otherValue');
+otherText.style.visibility = 'hidden';
+
+otherCheckbox.addEventListener('change', () => {
+  if (otherCheckbox.checked) {
+    otherText.style.visibility = 'visible';
+    otherText.value = '';
+  } else {
+    otherText.style.visibility = 'hidden';
+  }
+});
+</script>
+
+</html>

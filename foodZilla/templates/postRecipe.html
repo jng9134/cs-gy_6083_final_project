@@ -1,0 +1,60 @@
+<!DOCTYPE html >  
+
+<div class="container">
+    <form action='/submitRecipeAuth' method="POST">
+      <div>
+        <div>
+          <label for="title">Title</label>
+        </div>
+        <div>
+          <input type="text" id="recTitle" name="title" placeholder="Recipe Title">
+        </div>
+      </div>
+      <br>
+      <div>
+        <div>
+          <label for="nServings">Number of Servings</label>
+        </div>
+        <div>
+          <input type="number" id="servs" name="numServings" placeholder="Number of Servings">
+        </div>
+      </div>
+      <br>
+      <div>
+        <div>
+          <label>Tags</label>
+          <p>If multiple tags, please use space to separate</p>
+        </div>
+        <div>
+          <input type="text" name="tags" placeholder="e.g dairy vegetarian italian...">
+        </div>
+      </div>
+      <br>
+      <div>
+        <div>
+          <label>Ingredients</label>
+          <p>Please use format: ingredient amount unit</p>
+          <p>Plese separate each ingredient by a line break</p>
+        </div>
+        <div>
+          <textarea rows = "20" cols = "60" name = "ingredient" placeholder="e.g. beef 1 lb">
+         </textarea><br>
+        </div>
+      </div>
+      <br>
+      <div>
+        <div>
+          <label>Steps</label>
+          <p>Plese separate each step by a line break</p>
+        </div>
+        <div>
+          <textarea rows = "20" cols = "60" name = "steps">
+         </textarea><br>
+        </div>
+      </div>
+
+      <div>
+        <input type="submit" value="Next">
+      </div>
+    </form>
+  </div>

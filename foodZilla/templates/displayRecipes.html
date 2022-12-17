@@ -1,0 +1,79 @@
+<html>
+    <div>
+        <h1>{{info["title"]}}</h1>
+        <h2>Posted by {{info["postedBy"]}}</h2>
+        <p>Recipe ID: {{info["recipeID"]}}</p>
+        <p>Servings: {{info["numServings"]}}</p><br>
+    </div>
+
+    <div>
+        <h2>Steps:</h2>
+        {% for step in steps %}
+			<p>Step {{step[0]}}: {{step[1]}}</p>
+		{% endfor %}
+    </div>
+
+    <br>
+    <br>
+    <div>
+        <h3> Reviews </h3>
+        {% for review in reviews %}
+            <p>{{review['revTitle']}} by {{review['userName']}}</p>
+            <p>Rating: {{review['stars']}}</p>
+            <p>Review: {{review['revDesc']}}</p>
+            <br>
+        {% endfor %}
+            
+    </div>
+    <br>
+    <br>
+    <div>
+        <h3>Post a Review</h3>
+    </div>
+    <div>
+        <form action='/review' method="POST">
+            <fieldset>
+            <input type="hidden"  name="userName" value={{username}}>
+            <input type="hidden"  name="recipeID" value= {{info['recipeID']}}>
+            <div>
+                <label>Title</label>
+            </div>
+            <div>
+                <input type="text" name="revTitle" placeholder="Review Title">
+            </div>
+            </div>
+
+            <div>
+                <label>Stars</label>
+            </div>
+            <div>
+                <label>Star Rating:</label>
+                <select name="stars">
+                    <option value=1> * </option>
+                    <option value=2> * * </option>
+                    <option value=3> * * *</option>
+                    <option value=4> * * * *</option>
+                    <option value=5> * * * * *</option>
+                </select>
+            </div>
+            </div>
+            
+            <div>
+            <label>Description</label>
+            </div>
+            <div>
+            <textarea rows = "20" cols = "60" name = "revDesc">
+            </textarea><br>
+            </div>
+
+            <div>
+                <input type="submit" value="Submit">
+            </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <div>
+        <a href="/home">Go back</a>
+    </div>
+</html>

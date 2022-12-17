@@ -1,0 +1,38 @@
+<html>
+<head>
+</head>
+<body>
+{% if error %}
+<p class="error"><strong>Error:</strong> {{error}}</p>
+{% endif %}
+
+<h1>Welcome {{username}}</h1> 
+
+<h3>Profile:</h3>
+<p>{{profile}}</p>
+
+<h3>Recipes {{username}} Posted</h3>
+{% for recipe in recipesPosted %}
+<p>{{recipe['title']}}  {{recipe['recipeID']}}</p>
+{% endfor %}
+
+<h3>Groups {{username}} Belong to</h3>
+{% for group in groups %}
+<p>{{group['gName']}}  {{group['gName']}}</p>
+{% endfor %}
+
+<br>
+<br>
+<a href="/postRecipe">Post a new recipe</a>
+<br>
+<a href="/search">Search Recipes</a>
+<br>
+<a href="/searchSimilarUser">Search For Similar Users</a>
+<br>
+<a href="/logout">Logout</a>
+
+
+</body>
+
+
+</html>

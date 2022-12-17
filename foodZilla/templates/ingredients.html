@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #container{
+                margin:0px auto;
+                width:800px;
+                text-align:center;
+            }
+            #steps-table{
+                width:800px;
+                border: 1px solid #aaa;
+            }
+
+            #ingredients-table{
+                width:800px;
+                border: 1px solid #aaa;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <h2>Ingredients for {{recId}}</h2> 
+            <button onclick="addNewRow()">Add New Row</button>
+            <button onclick="deleteRow()">Delete Row</button>
+            <br><br>
+            <table id="ingredients-table">
+                <tr><th>Ingredient Name</th><th>Amount</th><th>Unit</th><th>Action</th></tr>
+            </table>
+        </div>        
+
+    
+        <div id = "container">
+            <button id="click">Click</button>
+        </div>
+        </body>
+
+
+    <script type="text/javascript">
+
+        function addNewRow(){
+            var table = document.getElementById("ingredients-table");
+            var rowCount = table.rows.length;
+            var cellCount = table.rows[0].cells.length; 
+            var row = table.insertRow(rowCount);
+            for(var i =0; i < cellCount; i++){
+                var cell = row.insertCell(i);
+              
+                if(i < cellCount-1){
+                    cell.innerHTML='<input type="text", name = "ingredients" />';
+                }
+                else{
+                    cell.innerHTML = '<input type="button" value="delete" onclick="deleteRow(this)" />';
+                }
+            }
+        }
+         
+        /* This method will delete a row */
+        function deleteRow(ele){
+            var table = document.getElementById('ingredients-table');
+            var rowCount = table.rows.length;
+            if(rowCount <= 1){
+                alert("There is no row available to delete!");
+                return;
+            }
+            if(ele){
+                //delete specific row
+                ele.parentNode.parentNode.remove();
+            }else{
+                //delete last row
+                table.deleteRow(rowCount-1);
+            }
+        }
+
+        const tableToJSON = (tableElem) => {
+          const tableRows = Array.from(tableElem.rows);
+          const tableHead = Array.from(tableRows[0].cells).map(cell => {
+            return cell.innerHTML.toLowerCase().replace(/ /g,'_')
+          });
+          return tableRows.slice(1).map(row => {
+            const rowData = {}
+            Array.from(row.cells).forEach((cell, i) => {
+              return rowData[tableHead[i]] = cell.innerHTML;
+            });
+            return rowData;
+          });
+        };
+
+        const btnElem = document.getElementById('click');
+        btnElem.addEventListener('click', (evt) => {
+          const tableElem = document.getElementById('ingredients-table');
+          const tableData = tableToJSON(tableElem);
+
+          // Post JSON data to the server.
+          const url = '/ingredients';
+          fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(tableData)
+          }).then(resp => resp.json())
+            .then(data => console.log(data));
+        });
+    
+    </script>
+</html>

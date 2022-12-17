@@ -4,6 +4,7 @@ James Ng jtn276 cs-gy 6083 Final Project: Foodzilla
 * make sure you have flask in your env
 * make sure mysql database is connected properly
 * make sure your working directory is /foodzilla
+* run init.py to run the flask app
 ## Additional Features
 * post a review
 * search for users with similar taste to current user
